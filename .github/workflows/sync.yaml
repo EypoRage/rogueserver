@@ -1,0 +1,30 @@
+name: Sync with Upstream Repository
+
+on:
+  schedule:
+    # Schedule the job to run at the beginning of every hour
+    - cron: '0 * * * *'
+  workflow_dispatch:
+    # Allows manual triggering of the workflow
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Merge upstream
+        run: |
+          git config --global user.name 'EypoBot'
+          git config --global user.email 'eypobot@users.noreply.github.com'
+
+          git checkout master
+          git pull --unshallow  
+
+          git remote add upstream https://github.com/pagefaultgames/rogueserver.git
+          git fetch upstream
+
+          git checkout master
+          git merge --no-edit upstream/master
+          git push origin master
+
+          # etc

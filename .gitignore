@@ -15,5 +15,3 @@ secret.key
 *.iws
 .vscode/launch.json
 
-#sensible data
-docker-compose.yml

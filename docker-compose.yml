@@ -22,10 +22,10 @@ services:
       timeout: 5s
       retries: 3
     environment:
-      MYSQL_ROOT_PASSWORD: pleb123
+      MYSQL_ROOT_PASSWORD: pokeadmin123
       MYSQL_DATABASE: pokeroguedb
       MYSQL_USER: pokerogue
-      MYSQL_PASSWORD: pleb1234
+      MYSQL_PASSWORD: pokeuser123
     volumes:
       - database:/var/lib/mysql
     networks:

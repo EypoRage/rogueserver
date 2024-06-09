@@ -1,6 +1,6 @@
 services:
   server:
-    command: --debug --dbaddr db --dbuser pokerogue --dbpass pokerogue --dbname pokeroguedb
+    command: --debug --dbaddr db --dbuser ${MYSQL_USER} --dbpass ${MYSQL_PASSWORD} --dbname ${MYSQL_DATABASE}
     image: ghcr.io/eyporage/rogueserver:master
     restart: unless-stopped
     depends_on:

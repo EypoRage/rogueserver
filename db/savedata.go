@@ -18,6 +18,8 @@
 package db
 
 import (
+	"bytes"
+	"encoding/gob"
 	"encoding/json"
 
 	"github.com/klauspost/compress/zstd"
@@ -67,7 +69,13 @@ func ReadSystemSaveData(uuid []byte) (defs.SystemSaveData, error) {
 
 	decompressed, err := zstdDecoder.DecodeAll(data, nil)
 	if err != nil {
-		return system, err
+		// compat
+		err = gob.NewDecoder(bytes.NewReader(data)).Decode(&system)
+		if err != nil {
+			return system, err
+		}
+
+		return system, nil
 	}
 
 	err = json.Unmarshal(decompressed, &system)
